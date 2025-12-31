@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: coroutine
+# key: co
+# --
+${1:task}<${2:T}> ${3:func}(${4:args}) {
+    co_return ${5:value};
+}

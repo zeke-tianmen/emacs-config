@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: concept multi
+# key: cpt
+# --
+template <typename T>
+concept ${1:ConceptName} =
+    requires(T t) {
+        { ${2:expr1} } -> ${3:ReturnConcept};
+        { ${4:expr2} } -> ${5:ReturnConcept2};
+    } &&
+    ${6:AdditionalConstraint}<T>;

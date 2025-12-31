@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: factory method
+# key: factory
+# --
+class ${1:Product} {
+public:
+    virtual ~${1:Product}() = default;
+    virtual void ${2:operation}() = 0;
+};
+
+class ${3:ConcreteProduct} : public ${1:Product} {
+public:
+    void ${2:operation}() override;
+};
+
+class ${4:Creator} {
+public:
+    virtual ~${4:Creator}() = default;
+    virtual std::unique_ptr<${1:Product}> create() const = 0;
+};
+
+class ${5:ConcreteCreator} : public ${4:Creator} {
+public:
+    std::unique_ptr<${1:Product}> create() const override {
+        return std::make_unique<${3:ConcreteProduct}>();
+    }
+};

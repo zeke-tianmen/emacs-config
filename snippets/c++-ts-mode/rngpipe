@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: ranges pipeline
+# key: rngp
+# --
+auto ${1:result} =
+    ${2:range}
+    | std::views::filter([](auto&& x) { return ${3:predicate}; })
+    | std::views::transform([](auto&& x) { return ${4:transform}; });

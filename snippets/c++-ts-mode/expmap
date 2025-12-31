@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: expected map
+# key: expmap
+# --
+auto ${1:result} = ${2:exp}.transform([](auto&& ${3:value}) {
+    return ${4:expr};
+});

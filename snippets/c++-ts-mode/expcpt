@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: constrained expected
+# key: expcpt
+# --
+template <typename T>
+requires ${1:ConceptName}<T>
+auto ${2:func}(T ${3:value})
+    -> std::expected<${4:Return}, ${5:Error}> {
+
+    if (${6:fail}) {
+        return std::unexpected(${7:error});
+    }
+
+    return ${8:result};
+}

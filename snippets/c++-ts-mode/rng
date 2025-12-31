@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ranges for_each
+# key: rng
+# --
+std::ranges::for_each(${1:range}, [&](auto&& ${2:item}) {
+    $0
+});

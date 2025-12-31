@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: singleton
+# key: singleton
+# --
+class ${1:Singleton} {
+public:
+    static ${1:Singleton}& instance() {
+        static ${1:Singleton} inst;
+        return inst;
+    }
+
+    ${1:Singleton}(const ${1:Singleton}&) = delete;
+    ${1:Singleton}& operator=(const ${1:Singleton}&) = delete;
+
+private:
+    ${1:Singleton}() = default;
+};

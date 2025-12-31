@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: observer
+# key: observer
+# --
+class ${1:Observer} {
+public:
+    virtual ~${1:Observer}() = default;
+    virtual void ${2:update}() = 0;
+};
+
+class ${3:Subject} {
+public:
+    void attach(${1:Observer}* o) { observers_.push_back(o); }
+    void notify() {
+        for (auto* o : observers_) o->${2:update}();
+    }
+private:
+    std::vector<${1:Observer}*> observers_;
+};

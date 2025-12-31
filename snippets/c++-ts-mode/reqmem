@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: constrained member
+# key: reqmem
+# --
+template <typename T>
+requires ${1:ConceptName}<T>
+${2:auto} ${3:method}(const T& ${4:value}) const {
+    $0
+}

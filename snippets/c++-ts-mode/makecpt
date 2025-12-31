@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: constrained factory
+# key: makecpt
+# --
+template <typename T>
+requires ${1:ConceptName}<T>
+auto make_${2:name}(${3:args}) {
+    return ${4:Type}{ ${5:init} };
+}

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: constrained class
+# key: reqcls
+# --
+template <typename T>
+requires ${1:ConceptName}<T>
+class ${2:ClassName} {
+public:
+    ${2:ClassName}() = default;
+
+    $0
+};

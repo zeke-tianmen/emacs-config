@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: concept overloads
+# key: ovcpt
+# --
+${1:auto} ${2:func}(${3:Integral auto} x) {
+    $0
+}
+
+${1:auto} ${2:func}(${4:FloatingPoint auto} x) {
+    $0
+}

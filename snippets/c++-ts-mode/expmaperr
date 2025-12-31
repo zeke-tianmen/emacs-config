@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: expected map_error
+# key: expmaperr
+# --
+auto ${1:result} = ${2:exp}.transform_error([](auto&& ${3:err}) {
+    return ${4:new_error};
+});

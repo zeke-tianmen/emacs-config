@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: expected sequence
+# key: expseq
+# --
+auto ${1:result} = [&]() -> std::expected<std::vector<${2:T}>, ${3:E}> {
+    std::vector<${2:T}> out;
+    out.reserve(${4:vec}.size());
+    for (auto& e : ${4:vec}) {
+        if (!e)
+            return std::unexpected(e.error());
+        out.push_back(*e);
+    }
+    return out;
+}();

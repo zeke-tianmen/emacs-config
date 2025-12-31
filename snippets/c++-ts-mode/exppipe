@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: expected pipeline
+# key: exppipe
+# --
+auto ${1:result} =
+    ${2:exp}
+        .transform([](auto&& x) { return ${3:map_expr}; })
+        .and_then([](auto&& y)
+            -> std::expected<${4:T}, ${5:E}> {
+            return ${6:then_expr};
+        })
+        .or_else([](auto&& e) {
+            return std::unexpected(${7:err_expr});
+        });

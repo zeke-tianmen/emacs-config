@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: builder
+# key: builder
+# --
+class ${1:Product} {
+public:
+    void set_${2:part}(int v) { ${2:part}_ = v; }
+private:
+    int ${2:part}_ = 0;
+};
+
+class ${3:Builder} {
+public:
+    ${3:Builder}& ${4:with_part}(int v) {
+        product_.set_${2:part}(v);
+        return *this;
+    }
+
+    ${1:Product} build() { return product_; }
+
+private:
+    ${1:Product} product_;
+};

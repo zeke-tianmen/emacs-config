@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: strategy
+# key: strategy
+# --
+class ${1:Strategy} {
+public:
+    virtual ~${1:Strategy}() = default;
+    virtual void ${2:execute}() = 0;
+};
+
+class ${3:ConcreteStrategy} : public ${1:Strategy} {
+public:
+    void ${2:execute}() override;
+};
+
+class ${4:Context} {
+public:
+    explicit ${4:Context}(std::unique_ptr<${1:Strategy}> s)
+        : strategy_(std::move(s)) {}
+
+    void run() { strategy_->${2:execute}(); }
+
+private:
+    std::unique_ptr<${1:Strategy}> strategy_;
+};

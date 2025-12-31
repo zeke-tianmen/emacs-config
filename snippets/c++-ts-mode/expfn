@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: expected function
+# key: expfn
+# --
+auto ${1:func}(${2:args}) -> std::expected<${3:T}, ${4:E}> {
+    if (${5:error_condition}) {
+        return std::unexpected(${6:error_value});
+    }
+    return ${7:value};
+}

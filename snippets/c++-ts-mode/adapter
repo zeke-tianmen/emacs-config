@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: adapter
+# key: adapter
+# --
+class ${1:Target} {
+public:
+    virtual ~${1:Target}() = default;
+    virtual void ${2:request}() = 0;
+};
+
+class ${3:Adaptee} {
+public:
+    void ${4:specific_request}();
+};
+
+class ${5:Adapter} : public ${1:Target} {
+public:
+    explicit ${5:Adapter}(${3:Adaptee}& a) : adaptee_(a) {}
+    void ${2:request}() override { adaptee_.${4:specific_request}(); }
+private:
+    ${3:Adaptee}& adaptee_;
+};

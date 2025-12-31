@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: composite
+# key: composite
+# --
+class ${1:Component} {
+public:
+    virtual ~${1:Component}() = default;
+    virtual void ${2:operation}() = 0;
+};
+
+class ${3:Leaf} : public ${1:Component} {
+public:
+    void ${2:operation}() override;
+};
+
+class ${4:Composite} : public ${1:Component} {
+public:
+    void add(std::unique_ptr<${1:Component}> c) {
+        children_.push_back(std::move(c));
+    }
+
+    void ${2:operation}() override {
+        for (auto& c : children_) c->${2:operation}();
+    }
+
+private:
+    std::vector<std::unique_ptr<${1:Component}>> children_;
+};

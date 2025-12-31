@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: expected or_else
+# key: expor
+# --
+auto ${1:result} = ${2:exp}.or_else([](auto&& ${3:err}) {
+    return std::unexpected(${4:recovery});
+});

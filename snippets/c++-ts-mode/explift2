@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: expected lift2
+# key: explift2
+# --
+auto ${1:lifted2} = [&](auto&& ${2:a}, auto&& ${3:b}) {
+    return ${2:a}.and_then([&](auto&& av) {
+        return ${3:b}.transform([&](auto&& bv) {
+            return ${4:func}(av, bv);
+        });
+    });
+};

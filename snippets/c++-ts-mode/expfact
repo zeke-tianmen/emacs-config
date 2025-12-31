@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: expected factory
+# key: expfact
+# --
+auto make_${1:name}(${2:args})
+    -> std::expected<${3:T}, ${4:E}> {
+
+    if (${5:fail}) {
+        return std::unexpected(${6:error});
+    }
+
+    return ${3:T}{ ${7:init} };
+}

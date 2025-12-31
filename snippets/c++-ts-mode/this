@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: deducing this
+# key: this
+# --
+auto ${1:method}(this auto& self, ${2:args}) {
+    $0
+}

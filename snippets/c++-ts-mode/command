@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: command
+# key: command
+# --
+class ${1:Command} {
+public:
+    virtual ~${1:Command}() = default;
+    virtual void ${2:execute}() = 0;
+};
+
+class ${3:Receiver} {
+public:
+    void ${4:action}();
+};
+
+class ${5:ConcreteCommand} : public ${1:Command} {
+public:
+    explicit ${5:ConcreteCommand}(${3:Receiver}& r) : receiver_(r) {}
+    void ${2:execute}() override { receiver_.${4:action}(); }
+private:
+    ${3:Receiver}& receiver_;
+};

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: expected lift
+# key: explift
+# --
+auto ${1:lifted} = [&](auto&& ${2:exp}) {
+    return ${2:exp}.transform(${3:func});
+};

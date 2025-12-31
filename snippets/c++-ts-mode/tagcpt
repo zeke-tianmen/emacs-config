@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: concept tag dispatch
+# key: tagcpt
+# --
+template <typename T>
+requires ${1:ConceptA}<T>
+void ${2:func}(T&& t) {
+    $0
+}
+
+template <typename T>
+requires ${3:ConceptB}<T>
+void ${2:func}(T&& t) {
+    $0
+}

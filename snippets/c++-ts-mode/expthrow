@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: expected value_or_throw
+# key: expthrow
+# --
+auto ${1:result} = [&]() {
+    if (!${2:exp})
+        throw ${2:exp}.error();
+    return *${2:exp};
+}();

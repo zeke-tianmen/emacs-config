@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: expected traverse
+# key: exptrav
+# --
+auto ${1:result} = [&]() -> std::expected<std::vector<${2:U}>, ${3:E}> {
+    std::vector<std::expected<${2:U}, ${3:E}>> tmp;
+    tmp.reserve(${4:vec}.size());
+    for (auto& v : ${4:vec})
+        tmp.push_back(${5:f}(v));
+    // sequence
+    std::vector<${2:U}> out;
+    out.reserve(tmp.size());
+    for (auto& e : tmp) {
+        if (!e)
+            return std::unexpected(e.error());
+        out.push_back(*e);
+    }
+    return out;
+}();

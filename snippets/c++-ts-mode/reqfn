@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: requires function
+# key: reqfn
+# --
+template <typename T>
+requires ${1:ConceptName}<T>
+${2:auto} ${3:func}(${4:T value}) {
+    $0
+}

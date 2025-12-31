@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: expected and_then
+# key: expthen
+# --
+auto ${1:result} = ${2:exp}.and_then([](auto&& ${3:value})
+        -> std::expected<${4:T}, ${5:E}> {
+    return ${6:expr};
+});

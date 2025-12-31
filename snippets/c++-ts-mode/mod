@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: module
+# key: mod
+# --
+export module ${1:module_name};
+
+export ${2:struct} ${3:Name} {
+    $0
+};

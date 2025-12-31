@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: decorator
+# key: decorator
+# --
+class ${1:Component} {
+public:
+    virtual ~${1:Component}() = default;
+    virtual void ${2:operation}() = 0;
+};
+
+class ${3:ConcreteComponent} : public ${1:Component} {
+public:
+    void ${2:operation}() override;
+};
+
+class ${4:Decorator} : public ${1:Component} {
+public:
+    explicit ${4:Decorator}(std::unique_ptr<${1:Component}> c)
+        : component_(std::move(c)) {}
+
+    void ${2:operation}() override {
+        component_->${2:operation}();
+    }
+
+protected:
+    std::unique_ptr<${1:Component}> component_;
+};

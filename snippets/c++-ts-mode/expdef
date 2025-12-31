@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: expected value_or_default
+# key: expdef
+# --
+auto ${1:result} = ${2:exp}.value_or(${3:default_value});

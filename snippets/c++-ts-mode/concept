@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: concept
+# key: concept
+# --
+template <typename T>
+concept ${1:ConceptName} = requires(T t) {
+    ${2:// requirements}
+};
