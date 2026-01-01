@@ -17,6 +17,8 @@
     - export to HTML/PDF: produce design docs automatically
 
 ** This is the kind of workflow senior engineers use to keep large C++ systems coherent.
+
+#+begin_example
 project/
 ├── src/
 ├── include/
@@ -25,6 +27,8 @@ project/
     ├── design.org
     ├── tasks.org
     └── decisions.org
+#+end_example
+
 ** Typical Usage*
 *** Link Org notes to C++ source files 
 
