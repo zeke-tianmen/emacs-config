@@ -2,7 +2,7 @@
 
 * Org mode & c++ projects
 ** Org mode and C++ projects fit together beautifully once you wire them up with the right structure. What you get is a living engineering notebook that stays in sync with your codebase, supports literate snippets, captures design decisions, and even drives builds or tests directly from Org.
-** Why Org + C++ works *so* +/well/+
+** Why Org + C++ works so well
 
     - centralized project notes: architecture, TODOs, design patterns, benchmarks
 
@@ -25,10 +25,6 @@ project/
     ├── design.org
     ├── tasks.org
     └── decisions.org
-** Types of Dogs
-*** D1
-*** D2
-*** D3
 ** Typical Usage*
 *** Link Org notes to C++ source files 
 
@@ -89,6 +85,20 @@ Add to your Org config:
 
     context-aware notes
 
+*** Architecture Decision Records (ADRs)
+In decisions.org:
+#+begin_src org
+ ADR-001: Switch to std::expected
+  - Status: Accepted
+  - Context: Error handling was inconsistent
+  - Decision: Use std::expected<T,E> for all new APIs
+  - Consequences: Cleaner call sites, easier testing
+#+end_src
+decision tracking
+
+project history
+
+
 *** Optional: Org Babel + CMake presets
 
 You can generate CMake presets from Org:
@@ -114,28 +124,6 @@ You can generate CMake presets from Org:
 generate config files
 
 keep build settings documented
-
-*** Architecture Decision Records (ADRs)
-In decisions.org:
-#+begin_example
-* ADR-001: Switch to std::expected
-  - Status: Accepted
-  - Context: Error handling was inconsistent
-  - Decision: Use std::expected<T,E> for all new APIs
-  - Consequences: Cleaner call sites, easier testing
-#+end_example
-decision tracking
-
-project history
-
-
-** Types of Cats
-1. c2 [2/3] [66%]
-   - [X] c21
-   - [X] c22
-   - [ ] c23
-2. c1
-3. c3
 
 ** TODO
 - how to set bookmark when use C-h i to view the info for org-mode
