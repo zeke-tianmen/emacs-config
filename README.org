@@ -1,0 +1,141 @@
+#+STARTUP: hideemph
+
+* Org mode & c++ projects
+** Org mode and C++ projects fit together beautifully once you wire them up with the right structure. What you get is a living engineering notebook that stays in sync with your codebase, supports literate snippets, captures design decisions, and even drives builds or tests directly from Org.
+** Why Org + C++ works *so* +/well/+
+
+    - centralized project notes: architecture, TODOs, design patterns, benchmarks
+
+    - literate code blocks: embed C++ snippets that tangle into real .cpp files
+
+    - task tracking: link TODOs directly to source files
+
+    - jump-to-source links: Org links that open .cpp or .h at exact lines
+
+    - build/test integration: run CMake, Ninja, tests from inside Org
+
+    - export to HTML/PDF: produce design docs automatically
+
+** This is the kind of workflow senior engineers use to keep large C++ systems coherent.
+project/
+├── src/
+├── include/
+├── CMakeLists.txt
+└── notes/
+    ├── design.org
+    ├── tasks.org
+    └── decisions.org
+** Types of Dogs
+*** D1
+*** D2
+*** D3
+** Typical Usage*
+*** Link Org notes to C++ source files 
+
+#+begin_src org
+
+- * Parser redesign
+  See the implementation:
+  [[file:../src/parser.cpp::class Parser]]
+#+end_src
+
+*** Embed C++ code blocks (with syntax highlighting)
+#+begin_example
+#+begin_src cpp :tangle ../src/foo.cpp
+#include <iostream>
+
+void foo() {
+    std::cout << "Hello\n";
+}
+#+end_src
+#+end_example
+- tangle to real files
+
+- literate programming
+- Run
+  C-c C-v t
+  Org writes the .cpp file automatically.
+  
+*** Run CMake/Ninja from Org
+#+begin_example
+#+begin_src sh :results output
+cmake -B build -DCMAKE_BUILD_TYPE=Debug
+cmake --build build
+#+end_src
+
+Or run tests:
+#+begin_src sh :results output
+ctest --test-dir build
+#+end_src
+
+#+end_example
+
+
+*** Capture templates for C++ work
+Add to your Org config:
+#+begin_src org
+(setq org-capture-templates
+      '(("c" "C++ Task" entry
+         (file "notes/tasks.org")
+         "* TODO %?\n  %U\n  File: %a")
+        ("d" "Design Note" entry
+         (file "notes/design.org")
+         "* %?\n  %U\n  Related: %a")))
+
+#+end_src
+- Now you can hit: C-c c c to instantly capture a C++ task linked to the current file.
+
+    capture templates
+
+    context-aware notes
+
+*** Optional: Org Babel + CMake presets
+
+You can generate CMake presets from Org:
+#+begin_example
+
+#+begin_src json :tangle ../CMakePresets.json
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "dev",
+      "generator": "Ninja",
+      "binaryDir": "build",
+      "cacheVariables": {
+        "CMAKE_CXX_STANDARD": "23"
+      }
+    }
+  ]
+}
+#+end_src
+
+#+end_example
+generate config files
+
+keep build settings documented
+
+*** Architecture Decision Records (ADRs)
+In decisions.org:
+#+begin_example
+* ADR-001: Switch to std::expected
+  - Status: Accepted
+  - Context: Error handling was inconsistent
+  - Decision: Use std::expected<T,E> for all new APIs
+  - Consequences: Cleaner call sites, easier testing
+#+end_example
+decision tracking
+
+project history
+
+
+** Types of Cats
+1. c2 [2/3] [66%]
+   - [X] c21
+   - [X] c22
+   - [ ] c23
+2. c1
+3. c3
+
+** TODO
+- how to set bookmark when use C-h i to view the info for org-mode
