@@ -88,6 +88,10 @@
 
 (use-package corfu
   :straight t
+  :custom
+  (corfu-auto t)                 ;; Enable auto completion
+  (corfu-auto-prefix 2)          ;; Complete after 2 characters
+  (corfu-auto-delay 0.1)         ;; Faster popup delay  
   :init
   (global-corfu-mode))
 
