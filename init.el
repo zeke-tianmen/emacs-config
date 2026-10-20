@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
@@ -33,7 +35,6 @@
   ((c-ts-mode . eglot-ensure)
    (c++-ts-mode . eglot-ensure)))
 
-
 ;; this works fine!
 ;; (use-package eglot
 ;;   :straight t
@@ -41,7 +42,27 @@
 ;;   ((c-mode . eglot-ensure)
 ;;    (c++-mode . eglot-ensure)
 ;;    (c-ts-mode . eglot-ensure)
-;;    (c++-ts-mode . eglot-ensure)))
+;;    (c++-ts-mode . eglot-ensure))
+;;   )
+
+;; server dies!
+;; (use-package eglot
+;;   :straight t
+;;   :hook
+;;   ((c-mode . eglot-ensure)
+;;    (c++-mode . eglot-ensure)
+;;    (c-ts-mode . eglot-ensure)
+;;    (c++-ts-mode . eglot-ensure))
+;;   :config
+;;   ;; 1. Configure C modes to use C23
+;;   (add-to-list 'eglot-server-programs
+;;                '((c-mode c-ts-mode) "clangd" "--std=c23"))
+  
+;;   ;; 2. Configure C++ modes to use C++20
+;;   (add-to-list 'eglot-server-programs
+;;                '((c++-mode c++-ts-mode) "clangd" "--std=c++20")))
+
+
 
 
 ;; ------------------------------
@@ -90,23 +111,47 @@
   :straight t
   :custom
   (corfu-auto t)                 ;; Enable auto completion
-  (corfu-auto-prefix 2)          ;; Complete after 2 characters
-  (corfu-auto-delay 0.1)         ;; Faster popup delay  
+  (corfu-auto-prefix 4)          ;; Complete after 4 characters
+  (corfu-auto-delay 0.5)         ;; Faster popup delay  
   :init
   (global-corfu-mode))
 
 ;; ------------------------------
 ;; Snippet
 ;; ------------------------------
+;;(use-package yasnippet
+;  :straight t
+;  :hook
+;  ((c-ts-mode . yas-minor-mode)
+;   (c++-ts-mode . yas-minor-mode)
+;   (c-mode . yas-minor-mode)
+;   (c++-mode . yas-minor-mode))
+;  :init
+;  (yas-global-mode 1))
+
 (use-package yasnippet
   :straight t
   :hook
   ((c-ts-mode . yas-minor-mode)
    (c++-ts-mode . yas-minor-mode)
    (c-mode . yas-minor-mode)
-   (c++-mode . yas-minor-mode))
+   (c++-mode . yas-minor-mode)
+   ;; 1. Automatically turn on yasnippet for both classic and treesitter python modes
+   (python-mode . yas-minor-mode)
+   (python-ts-mode . yas-minor-mode)
+   ;; 当进入 Tree-sitter 模式时，自动激活对应老模式的代码片段
+   (python-ts-mode-hook . (lambda () (yas-activate-extra-mode 'python-mode)))
+   (c-ts-mode-hook . (lambda () (yas-activate-extra-mode 'c-mode)))
+   (c++-ts-mode-hook . (lambda () (yas-activate-extra-mode 'c++-mode))))
   :init
-  (yas-global-mode 1))
+  (yas-global-mode 1)
+  ;; :config
+  ;; ;; 2. Map the Tree-sitter modes to inherit from their classic counterparts
+  ;; (with-eval-after-load 'yasnippet
+  ;;   (yas-define-roles 'python-ts-mode '(python-mode))
+  ;;   (yas-define-roles 'c-ts-mode '(c-mode))
+  ;;   (yas-define-roles 'c++-ts-mode '(c++-mode)))
+  )
 
 (use-package yasnippet-snippets
   :straight t)
@@ -141,6 +186,10 @@
 
 (setq major-mode-remap-alist
       (assq-delete-all 'cmake-mode major-mode-remap-alist))
+
+(setq treesit-language-source-alist
+      '((c "https://github.com/tree-sitter/tree-sitter-c" "v0.23.6")
+        (python "https://github.com/tree-sitter/tree-sitter-python" "v0.23.6")))
 
 ;; ------------------------------
 ;; NOT USED
